@@ -9,3 +9,7 @@ class Test(unittest.TestCase):
         result = "112.00Kb"
         command = bytes_to_readable(blocks)
         self.assertEqual(command, result)
+
+
+if __name__ == '__main__':
+    unittest.main()
