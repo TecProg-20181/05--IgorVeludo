@@ -5,12 +5,13 @@ from diskspace import *
 
 class Test(unittest.TestCase):
 
-    def test_bytes_to_readble(self):
-        blocks = 224
-        command = bytes_to_readable(blocks)
-        self.assertEqual(command, "112.00Kb")
+    def test_bytes_to_readable_Bits(self):
+        function = bytes_to_readable(1)
+        self.assertEquals('512.00B', function)
 
-
+    def test_bytes_to_readable_Kb(self):
+        function = bytes_to_readable(1024)
+        self.assertEquals('512.00Kb', function)
 
     def test_subprocess_check_output(self):
         command = 'du'
