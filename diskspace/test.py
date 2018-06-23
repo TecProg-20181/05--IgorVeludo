@@ -52,5 +52,9 @@ class Test(unittest.TestCase):
     def test_show_space_list(self):
         self.assertIsNone(show_space_list(directory='.', depth=-1, order=True))
 
+    def test_subprocess_check_output(self):
+        path = subprocess_check_output(self.cmd)
+        self.assertIn(self.path, path)
+
 if __name__ == '__main__':
     unittest.main()
