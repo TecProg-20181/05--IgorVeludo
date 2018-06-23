@@ -1,9 +1,27 @@
 import unittest
 import subprocess
+import StringIO
+import sys
 from diskspace import *
 
 
 class Test(unittest.TestCase):
+
+    def setUp(self):
+        self.largest_size = 8
+        self.total_size = 4
+        self.cmd = 'du '
+        self.path = os.path.abspath('.')
+        self.cmd += self.path
+        self.file_tree = {self.path: {'print_size': '50.00Kb', 'children': [], 'size': 3}}
+
+    def test_print_tree(self):
+        capturedOutput = StringIO.StringIO()
+        sys.stdout = capturedOutput
+        print_tree(self.file_tree, self.file_tree[self.path], self.path,
+                   self.largest_size, self.total_size)
+        sys.stdout = sys.__stdout__
+        self.assertEqual('50.00Kb   75%  '+self.path, capturedOutput.getvalue().strip())
 
     def test_bytes_to_readable_Bits(self):
         function = bytes_to_readable(1)
